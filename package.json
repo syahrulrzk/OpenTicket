@@ -1,0 +1,22 @@
+{
+  "name": "itsm-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ITSM & Helpdesk Platform - monorepo root (FE + BE)",
+  "scripts": {
+    "dev": "concurrently -n backend,frontend -c blue,magenta \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "npm --prefix apps/backend run start:dev",
+    "dev:frontend": "npm --prefix apps/frontend run dev",
+    "dev:kill": "pkill -f 'node dist/main.js' 2>/dev/null; pkill -f 'nest start' 2>/dev/null; pkill -f 'vite' 2>/dev/null; pkill -f 'concurrently' 2>/dev/null; fuser -k 3000/tcp 2>/dev/null; fuser -k 3001/tcp 2>/dev/null; echo 'Killed all dev processes'",
+    "dev:log": "tail -f /tmp/dev.log",
+    "build": "npm --prefix apps/backend run build && npm --prefix apps/frontend run build",
+    "start:backend": "npm --prefix apps/backend run start:prod",
+    "preview:frontend": "npm --prefix apps/frontend run preview",
+    "prisma:generate": "npm --prefix apps/backend run prisma:generate",
+    "prisma:migrate": "npm --prefix apps/backend run prisma:migrate",
+    "prisma:seed": "npm --prefix apps/backend run prisma:seed"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}
